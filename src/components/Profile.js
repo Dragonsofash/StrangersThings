@@ -56,7 +56,7 @@ const Profile = ({
   };
 
   return (
-    <div>
+    <div className="profile">
       <h2>Your Posts</h2>
       {posts.map((post, index) =>
         post.active ? (
@@ -72,7 +72,7 @@ const Profile = ({
               DELETE
             </button>
             <h3>Messages regarding this post: </h3>
-            <div>
+            <div className="messages-received">
               {post.messages
                 ? post.messages.map((message, index) => {
                     return (

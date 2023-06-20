@@ -42,13 +42,13 @@ const Posts = ({ loggedIn, setId }) => {
             id="search"
             type="text"
             value={searchTerm}
+            placeholder="Search for a Post"
             onChange={(e) => {
               setSearchTerm(e.target.value);
               filterPosts();
               console.log(searchTerm);
             }}
           />
-          <button>SEARCH</button>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { registerUser } from "../helper_files/apiCalls";
+import { registerUser, checkForAccount } from "../helper_files/apiCalls";
 
 const Register = ({
   username,
@@ -11,10 +11,16 @@ const Register = ({
   setLoggedIn,
 }) => {
   const [passConfirm, setPassConfirm] = useState("");
+  const [accountTaken, setAccountTaken] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    registerUser(username, password, setToken, setLoggedIn);
+
+    const accountExists = await checkForAccount(username);
+
+    accountExists
+      ? setAccountTaken(true)
+      : registerUser(username, password, setToken, setLoggedIn);
     setUsername("");
     setPassword("");
     setPassConfirm("");
@@ -60,6 +66,12 @@ const Register = ({
         />
         <button>Register</button>
         {password !== passConfirm ? <p>Passwords do not match</p> : null}
+        {accountTaken && (
+          <p>
+            Account already exists. Please choose a different username or Login{" "}
+            <Link to="/login">here</Link>.
+          </p>
+        )}
       </form>
     </div>
   );

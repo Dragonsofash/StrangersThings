@@ -72,6 +72,19 @@ const registerUser = async (name, pass, setToken, setLoggedIn) => {
   }
 };
 
+const checkForAccount = async (username) => {
+  try {
+    const response = await fetch(
+      `https://strangers-things.herokuapp.com/api/2303-ftb-et-web-pt/users?username=${username}`
+    );
+    const data = await response.json();
+    return data.users.length > 0;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+};
+
 const fetchPosts = async (setPosts) => {
   try {
     const response = await fetch(
@@ -182,6 +195,7 @@ export {
   postMessage,
   deletePost,
   registerUser,
+  checkForAccount,
   fetchPosts,
   login,
   makePost,
