@@ -69,12 +69,6 @@ const Register = ({
         />
         <button>Register</button>
         {password !== passConfirm ? <p>Passwords do not match</p> : null}
-        {accountTaken && (
-          <p>
-            Account already exists. Please choose a different username or Login{" "}
-            <Link to="/login">here</Link>.
-          </p>
-        )}
       </form>
       {success ? <h2>Successfully registered!</h2> : null}
       {error.length ? <p>{error}</p> : null}
