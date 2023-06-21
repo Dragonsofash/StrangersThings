@@ -11,16 +11,19 @@ const Register = ({
   setLoggedIn,
 }) => {
   const [passConfirm, setPassConfirm] = useState("");
-  const [accountTaken, setAccountTaken] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const accountExists = await checkForAccount(username);
-
-    accountExists
-      ? setAccountTaken(true)
-      : registerUser(username, password, setToken, setLoggedIn);
+    registerUser(
+      username,
+      password,
+      setToken,
+      setLoggedIn,
+      setSuccess,
+      setError
+    );
     setUsername("");
     setPassword("");
     setPassConfirm("");
@@ -73,6 +76,8 @@ const Register = ({
           </p>
         )}
       </form>
+      {success ? <h2>Successfully registered!</h2> : null}
+      {error.length ? <p>{error}</p> : null}
     </div>
   );
 };

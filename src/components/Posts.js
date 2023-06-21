@@ -46,7 +46,6 @@ const Posts = ({ loggedIn, setId }) => {
             onChange={(e) => {
               setSearchTerm(e.target.value);
               filterPosts();
-              console.log(searchTerm);
             }}
           />
         </div>
